@@ -120,8 +120,8 @@ bool __stdcall DllMain(const HMODULE module, const DWORD reason, LPVOID)
 
 	DetourTransactionBegin();
 
-	original_load_rson = reinterpret_cast<SQInteger(*)(const SQChar*)>(find_pattern(skCrypt("4C 8B DC 49 89 5B 08 57 48 81 EC A0 00 00 00 33"), nullptr));
-	original_load_script = reinterpret_cast<SQBool(*)(void*, const SQChar*, const SQChar*, SQInteger)>(find_pattern(skCrypt("48 8B C4 4C 89 40 18 48 89 48 08 55 41"), nullptr));
+	original_load_rson = reinterpret_cast<SQInteger(*)(const SQChar*)>(find_pattern(skCrypt("4C 8B DC 49 89 5B 08 49 89 73 10 57 48 81 EC A0"), nullptr));
+	original_load_script = reinterpret_cast<SQBool(*)(void*, const SQChar*, const SQChar*, SQInteger)>(find_pattern(skCrypt("48 8B C4 4C 89 40 18 48 89 50 10 48 89 48 08 55 53 41"), nullptr));
 
 	DetourAttach((LPVOID*)&original_load_rson, &load_rson);
 	DetourAttach((LPVOID*)&original_load_script, &load_script);
